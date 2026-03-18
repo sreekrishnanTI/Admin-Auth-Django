@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="space-y-6">
+
+    <!-- Title -->
+    <div>
+        <h3 class="text-2xl font-bold text-indigo-400 tracking-wide">
+            Dashboard
+        </h3>
+        <p class="text-gray-400 mt-1">
+            Welcome, <span class="text-white font-semibold">{{ request.user.username }}</span>.
+        </p>
+    </div>
+
+    <!-- Role Card -->
+    {% if request.user.role == 'admin' %}
+        <div class="bg-neutral-800 border border-indigo-600/40 
+                    rounded-xl p-6 shadow-lg shadow-indigo-900/30 
+                    transition hover:shadow-indigo-500/40">
+
+            <div class="flex items-center justify-between">
+                <div>
+                    <h4 class="text-lg font-semibold text-indigo-400">
+                        Admin Access
+                    </h4>
+                    <p class="text-gray-400 text-sm mt-1">
+                        You have elevated privileges and can manage system users.
+                    </p>
+                </div>
+
+                <span class="px-3 py-1 text-xs font-bold 
+                             bg-indigo-600/20 text-indigo-400 
+                             rounded-full border border-indigo-500/30">
+                    ADMIN
+                </span>
+            </div>
+
+            <div class="mt-4">
+                <a href="{% url 'user_list' %}"
+                   class="inline-block bg-indigo-600 hover:bg-indigo-500 
+                          px-4 py-2 rounded-lg 
+                          shadow-md shadow-indigo-600/40 
+                          transition duration-300">
+                    Go to Admin User Settings
+                </a>
+            </div>
+
+        </div>
+
+    {% else %}
+        <div class="bg-neutral-800 border border-neutral-700 
+                    rounded-xl p-6 shadow-lg 
+                    transition hover:shadow-neutral-600/40">
+
+            <div class="flex items-center justify-between">
+                <div>
+                    <h4 class="text-lg font-semibold text-gray-300">
+                        Standard User
+                    </h4>
+                    <p class="text-gray-400 text-sm mt-1">
+                        You can view and access your personal dashboard only.
+                    </p>
+                </div>
+
+                <span class="px-3 py-1 text-xs font-bold 
+                             bg-gray-700 text-gray-300 
+                             rounded-full border border-gray-600">
+                    USER
+                </span>
+            </div>
+
+        </div>
+    {% endif %}
+
+</div>
+
+{% endblock %}
